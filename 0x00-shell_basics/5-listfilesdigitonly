@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "$(ls --numeric-uid-gid)"
+echo "$(ls -la --numeric-uid-gid)"
