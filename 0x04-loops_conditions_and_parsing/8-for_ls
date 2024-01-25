@@ -4,10 +4,7 @@
 # In a list format
 # Where only the part of the name after the first dash is displayed
 
-for i in *-*
-do
-if [[ -f "$i" ]]
-then
-echo "${i#*-}"
-fi
+LIST=$(ls)
+for i in $LIST; do
+echo "${i}" | cut -d '-' -f2
 done
