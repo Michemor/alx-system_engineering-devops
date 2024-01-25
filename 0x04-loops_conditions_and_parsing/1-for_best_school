@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# The script below uses a loop implementation to print a phrase 10 times
+
+for _ in {1..10} 
+do
+echo "Best School"
+done
