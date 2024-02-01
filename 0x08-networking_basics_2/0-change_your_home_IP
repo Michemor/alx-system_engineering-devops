@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#The script below configures an Ubuntu server to:
+#1.Resolve localhost to 127.0.0.2
+#2.resolve facebook.com to 8.8.8.8
+
+cp /etc/hosts ~/hosts.new
+sed -i s/127.0.0.1/127.0.0.2/ ~/hosts.new
+if ! grep -q "157.240.11.35" ~/hosts.new; then
+	echo "157.240.11.35 facebook.com" >> ~/hosts.new
+fi
+sed -i s/157.240.11.35/8.8.8.8/ ~/hosts.new
+cp -f ~/hosts.new /etc/hosts
