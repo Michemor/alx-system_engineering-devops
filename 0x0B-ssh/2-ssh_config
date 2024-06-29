@@ -1,0 +1,6 @@
+Host 34.207.62.172
+    HostName 34.207.62.172
+    User ubuntu
+    PubkeyAuthentication yes
+    PasswordAuthentication no
+    IdentityFile ~/.ssh/school
