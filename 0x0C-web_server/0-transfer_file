@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 #  transfers a file from our client to a server
+# the file accepts 4 arguments:
+#       $1 - path to file
+#       $2 - ip address of the remote server
+#       $3 - username in the remote server
+#       $4 - path to file containing private key
 
-if [[ "$#" -ne 4 ]]
+if [ "$#" -ne 4 ]
 then
   echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
 else
-  scp -p -i "$4" -o StrictHostKeyChecking=no "$1" "$3"@"$2":~/
+  scp -i "$4" -o StrictHostKeyChecking=no "$1" "$3"@"$2":~
 fi
