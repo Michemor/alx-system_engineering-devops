@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# configures a new Ubuntu machine to install nginx
+# and print "Hello World" when querying Nginx
+
+# install nginx
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Allowing nginx to bypass firwall
+sudo ufw allow "Nginx HTTP"
+
+# Giving permissions to deal without sudo
+sudo chown "$USER:$USER" /var/www/html
+sudo chmod 755 -R /var/www/
+
+# output "Hello World!" when nginx is queried
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+
+printf %s "server {
+                    listen 80 default_server;
+                    listen [::]:80 default_server;
+                    root /var/www/html;
+                    index index.html index.htm;
+
+                    location /redirect_me {
+                          return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+                  }
+            }" > /etc/nginx/sites-available/default
+
+
+# start the nginx server
+sudo service nginx start
