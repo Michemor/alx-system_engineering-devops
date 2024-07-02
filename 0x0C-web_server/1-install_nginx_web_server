@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# configures a new Ubuntu machine to install nginx
+# and print "Hello World" when querying Nginx
+
+# install nginx
+sudo apt-get -y update
+sudo apt-get -y nginx
+
+# output "Hello World!" when nginx is queried
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+
+printf %s "server {
+      listen  80;
+      listen  [::]:80;
+      root    /var/www/html/index.html;
+      index   index.html;
+}
+" > /etc/nginx/sites-available/default
+
+# start the nginx server
+sudo service nginx reload
