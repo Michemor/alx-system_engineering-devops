@@ -3,8 +3,8 @@
 # and print "Hello World" when querying Nginx
 
 # install nginx
-sudo apt -y update
-sudo apt -y install nginx
+sudo apt-get update
+sudo apt-get install -y nginx
 
 # Allowing nginx to bypass firwall
 sudo ufw allow "Nginx HTTP"
@@ -15,6 +15,13 @@ sudo chmod 755 -R /var/www/
 
 # output "Hello World!" when nginx is queried
 echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+
+printf %s "server {
+                    listen 80 default_server;
+                    listen [::]:80 default_server;
+                    root /var/www/html;
+                    index index.html index.htm;
+          }" > /etc/nginx/sites-available/default
 
 # start the nginx server
 sudo service nginx start
