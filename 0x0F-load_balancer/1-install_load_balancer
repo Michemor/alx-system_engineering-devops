@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# installs and configures HAproxy on lb-01 server
+
+# Step 1: install HAproxy
+apt-get install -y software-properties-common
+add-apt-repository ppa:vbernat/haproxy-2.9
+
+apt-get update
+apt-get install -y haproxy=2.9\*
+
+# enable HAproxy so that it can start and stop with VPS
+echo "ENABLED=1" >> /etc/default/haproxy
+
+# we make a copy of the daulthaproxy.cfg file:
+sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.original
+
+# we can now make changes to our copy
+printf %s "global
+    log 127.0.0.1 local0 notice
+    maxconn 2000
+    user haproxy
+    group haproxy
+
+defaults
+    log global
+    mode http
+    option httplog
+    option dontlognull
+    retries 3
+    option redispatch
+    timeout connect 5000
+    timeout client 10000
+    timeout server 10000
+
+listen 437274-lb-01
+    bind *:80
+    mode http
+    balance roundrobin
+    option httpclose
+    option forwardfor
+    server 437274-web-01 34.207.62.172:80 check
+    server 437274-web-02 35.175.128.130:80 check
+    " >> /etc/haproxy/haproxy.cfg
+
+service haproxy start
