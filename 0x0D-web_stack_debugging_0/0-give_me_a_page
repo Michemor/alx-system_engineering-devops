@@ -2,4 +2,5 @@
 # starts the apache2 server
 # return a page containing Hello Holberton when querying the root of it.
 
+echo "ServerName localhost" >> /etc/apache2/apache2.conf
 sudo service apache2 start
