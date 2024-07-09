@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Nginx must be running, and listening on port 80 of all the server’s active IPv4 IPs
+
+sed -i "s/Listen 80/Listen 8080" /etc/apache2/apache2.ports
+sed -i "s/Listen 80/Listen 8080" /etc/apache2/sites-enabled/000-default.conf
+service apache2 restart
+sed -i "s/ipv6only=no//" /etc/nginx/sites-available/default
+service nginx restart
