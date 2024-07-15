@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-# 1. Ssh into my command line
-# 2. installs nginx server
-
-# scp -i ~/.ssh/school -o StrictHostKeyChecking=no "$1" ubuntu@35.175.128.130:~/
-ssh -i ~/.ssh/school ubuntu@35.175.128.130 "$1" "$2"
