@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
-#  transfers a file from our client to a server
-# the file accepts 4 arguments:
-#       $1 - path to file
-#       $2 - ip address of the remote server
-#       $3 - username in the remote server
-#       $4 - path to file containing private key
-
+# transfers a file to remote server 
 if [ "$#" -ne 4 ]
 then
   echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
