@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# dumps databases to a file and compresses the file
+
+username="root"
+password="$1"
+
+sudo mysqldump -u"$username" -p"$password" --all-databases | sudo tee backup.sql > /dev/null
+tar -cvzf "$(date +%d-%m-%Y)".tar.gz backup.sql
