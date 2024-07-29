@@ -1,10 +1,6 @@
 #!/usr/bin/python3
-"""
-fetches data from a REST API
-Manipulates the data for simple display to user
-"""
+""" exports data into csv format """
 import csv
-import pandas as pd
 import requests
 import sys
 
@@ -13,16 +9,15 @@ if __name__ == "__main__":
     employee_id = int(sys.argv[1])
     url = "https://jsonplaceholder.typicode.com/users/"
     filename = f"{employee_id}.csv"
-    info = requests.get(url + f"{employee_id}").json()
-    name = info.get("username")
+    user = requests.get(url + f"{employee_id}").json()
     tasks = requests.get(url + f"{employee_id}/todos").json()
 
     data = []
 
     for task in tasks:
         task_dict = {
-            "id": f"{employee_id}",
-            "name": f"{name}",
+            "id": user.get("id"),
+            "name": user.get("username"),
             "status": task.get("completed"),
             "title": task.get("title")
         }
