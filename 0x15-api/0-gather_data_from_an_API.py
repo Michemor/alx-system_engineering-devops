@@ -19,7 +19,6 @@ def fetch_data(user_id):
         if todo.get("completed") is True:
             done.append(todo.get("title"))
         total += 1
-    
     count_done = len(done)
     print("Employee {} is done with tasks({}/{}):"
           .format(user_resp.get("name"), count_done, total))
