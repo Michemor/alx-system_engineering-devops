@@ -7,25 +7,27 @@ import requests
 import sys
 
 
-if __name__ == "__main__":
-    employee_id = int(sys.argv[1])
-    url = "https://jsonplaceholder.typicode.com/users/"
+def fetch_data(user_id):
+    """ fetches data from API and displays employee tasks """
 
-    info = requests.get(url + f"{employee_id}").json()
-    EMPLOYEE_NAME = info.get("name")
+    users = f"https://jsonplaceholder.typicode.com/users/{user_id}"
+    todos = f"https://jsonplaceholder.typicode.com/users/{user_id}/todos"
 
-    tasks = requests.get(url + f"{employee_id}/todos").json()
+    user_resp = requests.get(users).json()
+    name = user_resp.get("name")
+
+    todo_resp = requests.get(todos).json()
+    total = 0
     done = []
-    undone = []
-    for task in tasks:
-        if task.get("completed") is True:
-            done.append(task.get("title"))
-        else:
-            undone.append(task.get("title"))
+    for todo in todo_resp:
+        if todo.get("completed") is True:
+            done.append(todo.get("title"))
+        total += 1
+    
+    count_done = len(done)
+    print(f"Employee {name} is done with tasks({count_done}/{total}):")
+    [print(f"\t {d}") for d in done]
 
-    NUMBER_OF_DONE_TASKS = len(done)
-    TOTAL_NUMBER_OF_TASKS = NUMBER_OF_DONE_TASKS + len(undone)
 
-    print("Employee {} is done with tasks({}/{}):"
-          .format(EMPLOYEE_NAME, NUMBER_OF_DONE_TASKS, TOTAL_NUMBER_OF_TASKS))
-    [print(f"\t {TASK_TITLE}") for TASK_TITLE in done]
+if __name__ == "__main__":
+    fetch_data(int(sys.argv[1]))
