@@ -31,10 +31,10 @@ Pythonic code conforms to the following principles: readable, clear and simple.
 This means that the code is simple, clean and easy for everyone to understand.
 
         _________PYTHONIC__________
-       \|       - readable        \|
-       \|       - simple          \|
-       \|       - clean           \|
-       \|_________________________\|
+        |       - readable        |
+        |       - simple          |
+        |       - clean           |
+        |_________________________|
 
 The following link provides a guide to naming conventions for variables, methods,
 packages, functions, and constants in the pythonic way
