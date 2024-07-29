@@ -37,4 +37,4 @@ if __name__ == "__main__":
                                     total_number_of_tasks))
 
     for task in done_tasks:
-        print(f"\t{task}")
+        print(f"\t {task}")
