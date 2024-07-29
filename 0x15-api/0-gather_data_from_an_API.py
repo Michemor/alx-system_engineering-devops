@@ -8,33 +8,19 @@ from sys import argv
 
 
 if __name__ == "__main__":
-    employee_id = int(argv[1])
+    employee_id = argv[1]
+
+    # url
+    url = 'https://jsonplaceholder.typicode.com/'
 
     # obtain users name
-    user_dict = {'id': f'{employee_id}'}
-    response = requests.get('https://jsonplaceholder.typicode.com/users',
-                            params=user_dict)
-    e_name = [name.get('name') for name in response.json()]
+    users = requests.get(url + f'users/{employee_id}').json()
+    name = users.get('name')
 
     # fetch the todo list
-    # url for fetching to do list
-    url = f'https://jsonplaceholder.typicode.com/users/{employee_id}/todos'
-    req = requests.get(url)
-    todos_json = req.json()
+    todos = requests.get(url + 'todos', params={'userId': employee_id}).json()
 
-    done_tasks = []
-    total_number_of_tasks = 0
-    number_of_done_tasks = 0
-    for todo in todos_json:
-        if todo.get('completed') is True:
-            done_tasks.append(todo.get('title'))
-            number_of_done_tasks += 1
-        total_number_of_tasks += 1
+    done = [d.get('title') for d in todos if d.get('completed') is True]
 
-    print("Employee {} is done with tasks({}/{}):".format(
-                                    ' '.join(e_name),
-                                    number_of_done_tasks,
-                                    total_number_of_tasks))
-
-    for task in done_tasks:
-        print(f"\t {task}")
+    print(f"Employee {name} is done with tasks({len(done)}/{len(todos)}):")
+    [print(f"\t {title}") for title in done]
