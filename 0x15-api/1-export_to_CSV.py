@@ -6,13 +6,13 @@ import sys
 
 
 if __name__ == "__main__":
-    employee_id = int(sys.argv[1])
+    user_id = int(sys.argv[1])
     url = "https://jsonplaceholder.typicode.com/users/"
-    filename = f"{employee_id}.csv"
-    user = requests.get(url + f"{employee_id}").json()
-    tasks = requests.get(url + f"{employee_id}/todos").json()
+    filename = f"{user_id}.csv"
+    user = requests.get(url + f"{user_id}").json()
+    tasks = requests.get(url + f"{user_id}/todos").json()
 
-    data = []
+    task_list = []
 
     for task in tasks:
         task_dict = {
@@ -21,10 +21,10 @@ if __name__ == "__main__":
             "status": task.get("completed"),
             "title": task.get("title")
         }
-        data.append(task_dict)
+        task_list.append(task_dict)
 
     keys = ["id", "name", "status", "title"]
-    with open(filename, "w") as csvfile:
+    with open(filename, "w", newline="") as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=keys,
                                 quoting=csv.QUOTE_ALL)
-        writer.writerows(data)
+        writer.writerows(task_list)
