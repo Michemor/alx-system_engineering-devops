@@ -12,7 +12,7 @@ if __name__ == "__main__":
     url = "https://jsonplaceholder.typicode.com/users/"
 
     info = requests.get(url + f"{employee_id}").json()
-    username = info.get("name")
+    EMPLOYEE_NAME = info.get("name")
 
     tasks = requests.get(url + f"{employee_id}/todos").json()
     done = []
@@ -23,11 +23,9 @@ if __name__ == "__main__":
         else:
             undone.append(task.get("title"))
 
-    completed = len(done) + len(undone)
+    NUMBER_OF_DONE_TASKS = len(done)
+    TOTAL_NUMBER_OF_TASKS = NUMBER_OF_DONE_TASKS + len(undone)
 
-    print("Employee {} is done with tasks({}/{}):".format
-                                        (username,
-                                        len(done),
-                                        completed))
-    [print("\t {}".format(t)) for t in done]
-
+    print("Employee {} is done with tasks({}/{}):"
+          .format(EMPLOYEE_NAME, NUMBER_OF_DONE_TASKS, TOTAL_NUMBER_OF_TASKS))
+    [print(f"\t {TASK_TITLE}") for TASK_TITLE in done]
