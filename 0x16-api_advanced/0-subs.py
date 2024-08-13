@@ -27,7 +27,6 @@ def number_of_subscribers(subreddit):
         response = requests.get(search_reddit,
                                 headers=heads,
                                 allow_redirects=False)
-        response.raise_for_status()
         result = response.json().get('data')
         print(result)
         return result.get('subscribers')
