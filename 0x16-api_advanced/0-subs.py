@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """
-API MODULE: makes requests to Reddit and filters according to specifications
+makes requests to Reddit API and filters
+according to specifications
 """
-from requests.exceptions import HTTPError
 import requests
 
 
@@ -31,7 +31,5 @@ def number_of_subscribers(subreddit):
         result = response.json().get('data')
         print(result)
         return result.get('subscribers')
-    except HTTPError as http_err:
-        return 0
     except Exception as e:
         return 0

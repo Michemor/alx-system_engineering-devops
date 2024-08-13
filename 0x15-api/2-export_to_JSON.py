@@ -24,6 +24,7 @@ if __name__ == "__main__":
         data.append(task_dict)
 
     data_dict = {f"{employee_id}": data}
+    print(type(data_dict))
 
     with open(filename, "w") as json_file:
         json.dump(data_dict, json_file)
