@@ -14,20 +14,20 @@ def top_ten(subreddit):
     """
 
     if subreddit is None or not isinstance(subreddit, str):
-        print('None')
+        print("None")
 
-    url = f'https://www.reddit.com/r/{subreddit}/hot/.json'
-    headers = {'User-agent': '1-top_ten/1.0 (Python 3.4.3; Ubuntu 20.04)'}
-    limit = {'limit': 10}
+    url = f"https://www.reddit.com/r/{subreddit}/hot/.json"
+    headers = {"User-agent": "1-top_ten/1.0 (Python 3.4.3; Ubuntu 20.04)"}
+    limit = {"limit": 10}
 
     try:
         response = requests.get(url,
                                 headers=headers,
                                 params=limit,
                                 allow_redirects=False)
-        children = response.json().get('data').get('children')
+        children = response.json().get("data").get("children")
 
         for child in children:
-            print(child.get('data').get('title'))
+            print(child.get("data").get("title"))
     except Exception as e:
-        print('None')
+        print("None")

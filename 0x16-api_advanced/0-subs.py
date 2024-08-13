@@ -20,15 +20,15 @@ def number_of_subscribers(subreddit):
     if subreddit is None or not isinstance(subreddit, str):
         return 0
 
-    search_reddit = f'https://www.reddit.com/r/{subreddit}/about.json'
-    heads = {'User-Agent': '0-subs/1.0 (Python 3.10; Ubuntu 20.04)'}
+    search_reddit = f"https://www.reddit.com/r/{subreddit}/about.json"
+    heads = {"User-Agent": "0-subs/1.0 (Python 3.10; Ubuntu 20.04)"}
 
     try:
         response = requests.get(search_reddit,
                                 headers=heads,
                                 allow_redirects=False)
-        result = response.json().get('data')
+        result = response.json().get("data")
         print(result)
-        return result.get('subscribers')
+        return result.get("subscribers")
     except Exception as e:
         return 0
