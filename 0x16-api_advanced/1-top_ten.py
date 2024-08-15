@@ -11,6 +11,9 @@ def top_ten(subreddit):
     for a given reddit
     """
 
+    if subreddit is None or not isinstance(subreddit, str):
+        print("None")
+
     url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
     headers = {"User-Agent": "1-top_ten/1.0 (Python 3.4.3; Ubuntu 20.04)"}
     limit = {"limit": 10}
