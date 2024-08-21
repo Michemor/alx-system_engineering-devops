@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+# allows nginx to allow traffic from IPv4 addresses
 
 sed -i "s/Listen 80/Listen 8080" /etc/apache2/apache2.ports
 sed -i "s/Listen 80/Listen 8080" /etc/apache2/sites-enabled/000-default.conf
